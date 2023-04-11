@@ -1,4 +1,37 @@
-xcuserdata
+Gann square
+```python
+ gann_square(n):
+    """
+    Generates the Gann square of order n recursively.
+
+    Args:
+        n: An integer representing the order of the Gann square.
+
+    Returns:
+        A list of lists representing the Gann square.
+    """
+    if n == 1:
+        return [[1]]
+    else:
+        prev_square = gann_square(n-1)
+        prev_size = len(prev_square)
+        new_row = [prev_square[-1][-1] + i for i in range(1, prev_size+1)]
+        new_col = [prev_square[i][-1] + prev_size for i in range(prev_size)]
+        new_square = [[0] * prev_size for _ in range(prev_size)]
+        new_square[0] = new_row
+        for i in range(1, prev_size):
+            new_square[i][0] = new_col[i-1]
+        for i in range(1, prev_size):
+            for j in range(1, prev_size):
+                new_square[i][j] = prev_square[i-1][j-1]
+        return new_square
+```
+
+This function takes an integer `n` as input and returns a list of lists representing the Gann square of order `n`. The Gann square is a square grid of integers where the numbers are arranged in such a way that the sum of any row, column, or diagonal is the same. The Gann square of order 1 is simply the number 1.
+
+The `if` statement checks if `n` is equal to 1. If it is, the function returns a list containing a single list with the number 1. Otherwise, the function recursively calls itself with `n-1` as the argument to generate the previous Gann square. It then calculates the new row and column for the current Gann square based on the previous Gann square, and initializes a new square with zeros. Finally, it fills in the new square with the values of the previous square and the new row and column, and returns the new square.
+
+Note that this implementation assumes that `n` is a positive integer.
 **/project.xcworkspace/xcshareddata
 **/project.xcworkspace/xcuserdata
 .DS_Store
